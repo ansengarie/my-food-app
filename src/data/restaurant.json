@@ -1,0 +1,52 @@
+[
+    {
+        "name": "Asian Delight",
+        "price": "$9",
+        "distance": "2 km away",
+        "time": "40 min",
+        "image": "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "feedback": 5,
+        "reviews": 102,
+        "category": "Asian Food"
+    },
+    {
+        "name": "Chocolate Lava Cake",
+        "price": "$5",
+        "distance": "1 km away",
+        "time": "30 min",
+        "image": "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "feedback": 4.8,
+        "reviews": 87,
+        "category": "Dessert"
+    },
+    {
+        "name": "Spaghetti Carbonara",
+        "price": "$12",
+        "distance": "3 km away",
+        "time": "35 min",
+        "image": "https://images.unsplash.com/photo-1590576502976-a7b6cd63f4dc?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "feedback": 4.7,
+        "reviews": 120,
+        "category": "Italian Food"
+    },
+    {
+        "name": "Cheesy Burger",
+        "price": "$8",
+        "distance": "1.5 km away",
+        "time": "25 min",
+        "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1899&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "feedback": 4.5,
+        "reviews": 200,
+        "category": "Fast Food"
+    },
+    {
+        "name": "Grilled BBQ Ribs",
+        "price": "$15",
+        "distance": "4 km away",
+        "time": "50 min",
+        "image": "https://images.unsplash.com/photo-1623174479658-79fb603acf60?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "feedback": 4.9,
+        "reviews": 65,
+        "category": "Barbeque"
+    }
+]
