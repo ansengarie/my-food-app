@@ -4,16 +4,28 @@
             <div class="flex flex-col space-y-10">
                 <MenuItem icon="bars" className="text-primary" />
                 <MenuItem icon="house" />
-                <MenuItem icon="pizza-slice" className="-rotate-45" />
+                <RouterLink to="/">
+                    <MenuItem
+                        icon="pizza-slice"
+                        :isActive="$route.path === '/'"
+                    />
+                </RouterLink>
+
                 <MenuItem icon="calendar-day" className="scale-x-[-1]" />
                 <MenuItem icon="credit-card" />
-                <MenuItem icon="heart" />
+                <RouterLink to="/favorites">
+                    <MenuItem
+                        icon="heart"
+                        :isActive="$route.path === '/favorites'"
+                    />
+                </RouterLink>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { RouterLink } from "vue-router";
 import MenuItem from "./MenuItem.vue";
 
 export default {
