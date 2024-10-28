@@ -1,16 +1,18 @@
 <template>
+    <CategoryButtons
+        @category-selected="selectCategory"
+        :selectedCategory="selectedCategory"
+    />
     <div class="flex flex-col space-y-2">
         <!-- Sort Dropdown -->
         <div class="relative inline-block">
-            <!-- Ubah ke inline-block -->
             <button
                 @click.stop="toggleSortMenu"
-                class="flex flex-row items-center p-2 space-x-2 rounded-lg "
+                class="flex flex-row items-center p-2 space-x-2 rounded-lg"
             >
-                <span
-                    >Sort by:
-                    <strong>{{ sortLabels[currentSort] }}</strong></span
-                >
+                <span>Sort by:
+                    <strong>{{ sortLabels[currentSort] }}</strong>
+                </span>
                 <font-awesome-icon :icon="['fas', 'chevron-down']" />
             </button>
 
@@ -56,6 +58,7 @@ export default {
         return {
             restaurants: restaurantsData,
             selectedCategory: "all",
+            searchQuery: "", // Tambahan untuk search
             showSortMenu: false,
             currentSort: "reviews",
             sortLabels: {
@@ -68,6 +71,7 @@ export default {
         };
     },
     computed: {
+        // Filter berdasarkan kategori
         filteredRestaurants() {
             if (this.selectedCategory === "all") {
                 return this.restaurants;
@@ -76,8 +80,25 @@ export default {
                 (restaurant) => restaurant.category === this.selectedCategory
             );
         },
+        // Filter berdasarkan search query
+        searchedAndFilteredRestaurants() {
+            let filteredList = this.filteredRestaurants;
+
+            if (this.searchQuery) {
+                const query = this.searchQuery.toLowerCase();
+                filteredList = filteredList.filter((restaurant) => {
+                    return (
+                        restaurant.name.toLowerCase().includes(query) ||
+                        restaurant.category.toLowerCase().includes(query)
+                    );
+                });
+            }
+
+            return filteredList;
+        },
+        // Sort hasil pencarian
         sortedRestaurants() {
-            const restaurants = [...this.filteredRestaurants];
+            const restaurants = [...this.searchedAndFilteredRestaurants];
 
             switch (this.currentSort) {
                 case "reviews":
@@ -128,18 +149,19 @@ export default {
             this.showSortMenu = false;
         },
         closeDropdown(e) {
-            // Jika klik di luar dropdown, tutup dropdown
             if (!this.$el.contains(e.target)) {
                 this.showSortMenu = false;
             }
         },
+        // Method untuk menerima query pencarian dari parent component
+        updateSearch(query) {
+            this.searchQuery = query;
+        },
     },
     mounted() {
-        // Tambahkan event listener untuk menutup dropdown saat klik di luar
         document.addEventListener("click", this.closeDropdown);
     },
     beforeUnmount() {
-        // Hapus event listener saat komponen dihancurkan
         document.removeEventListener("click", this.closeDropdown);
     },
 };

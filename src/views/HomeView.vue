@@ -6,7 +6,7 @@
         <div class="flex-1 ml-[6%] mr-[23%] overflow-y-scroll bg-slate-200">
             <div class="flex flex-col px-10 py-10 space-y-10 min-h-[1500px]">
                 <!-- Search and Filter -->
-                <SearchAndFilter />
+                <SearchAndFilter @search="handleSearch" />
 
                 <!-- Promotional Banner -->
                 <PromotionalBanner />
@@ -19,10 +19,8 @@
                     </p>
                 </div>
 
-                
-
                 <!-- Sort and Restaurant List -->
-                <SortAndRestaurantList />
+                <SortAndRestaurantList ref="restaurantList" />
             </div>
         </div>
 
@@ -48,5 +46,11 @@ export default {
         SortAndRestaurantList,
         OrderSummary,
     },
+    methods: {
+        handleSearch(query) {
+            // Teruskan query pencarian ke komponen SortAndRestaurantList
+            this.$refs.restaurantList.updateSearch(query);
+        }
+    }
 };
 </script>

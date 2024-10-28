@@ -7,7 +7,7 @@
             alt=""
             class="absolute h-40 left-20 top-7"
         />
-        <div class="z-20 px-5 py-20 w-fit">
+        <div class="px-5 py-20 w-fit">
             <h1 class="text-2xl font-bold tracking-widest text-rose-400">
                 Get desert FOR FREE!
             </h1>

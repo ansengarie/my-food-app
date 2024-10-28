@@ -26,11 +26,15 @@
                     <h1 class="text-xl font-bold">My order</h1>
                     <!-- List order Looping -->
                     <ul class="space-y-5">
-                        <li class="flex flex-row justify-between">
+                        <li
+                            v-for="item in orderItems"
+                            :key="item.id"
+                            class="flex flex-row justify-between"
+                        >
                             <div class="flex flex-row items-center space-x-2">
                                 <img
-                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp4Af91__J4Uio6iSKrjkgMqq7ExumPol_bg&s"
-                                    alt=""
+                                    :src="item.image"
+                                    :alt="item.name"
                                     class="object-cover h-10 rounded-lg aspect-square"
                                 />
                                 <div
@@ -40,70 +44,44 @@
                                         :icon="['fas', 'xmark']"
                                         class="w-2"
                                     />
-                                    <span>2</span>
+                                    <span>{{ item.quantity }}</span>
                                 </div>
-                                <p>Aji Nuansa Sengarie</p>
+                                <p>{{ item.name }}</p>
                             </div>
                             <div class="flex flex-row items-center space-x-1">
-                                <strong class="text-xl">$2</strong>
-                                <font-awesome-icon :icon="['fas', 'xmark']" />
-                            </div>
-                        </li>
-                        <li class="flex flex-row justify-between">
-                            <div class="flex flex-row items-center space-x-2">
-                                <img
-                                    src="https://media.licdn.com/dms/image/v2/D4D03AQEO4-PPM8je-Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1701310199366?e=1735171200&v=beta&t=okrAqgvutiEKKNUSRO13T7eRtXy0UhRN11Fn5v9vy0s"
-                                    alt=""
-                                    class="object-cover h-10 rounded-lg aspect-square"
-                                />
-                                <div
-                                    class="flex flex-row items-center space-x-1"
+                                <strong class="text-xl"
+                                    >${{ item.totalPrice.toFixed(2) }}</strong
+                                >
+                                <button
+                                    @click="removeFromOrder(item.id)"
+                                    class="text-red-500"
                                 >
                                     <font-awesome-icon
                                         :icon="['fas', 'xmark']"
-                                        class="w-2"
                                     />
-                                    <span>1</span>
-                                </div>
-                                <p>Rayhan Abduhuda</p>
-                            </div>
-                            <div class="flex flex-row items-center space-x-1">
-                                <strong class="text-xl">$1,5</strong>
-                                <font-awesome-icon :icon="['fas', 'xmark']" />
+                                </button>
                             </div>
                         </li>
                     </ul>
                     <div class="flex flex-row justify-between">
                         <div>Delivery</div>
-                        <strong class="text-xl">$0</strong>
+                        <strong class="text-xl">$ {{ deliveryFee }}</strong>
                     </div>
                 </div>
+                <!-- Total -->
                 <div class="flex flex-row justify-between pt-5">
-                    <div class="flex flex-row space-x-3">
-                        <h3>Persons:</h3>
-                        <div class="flex flex-row items-center space-x-2">
-                            <font-awesome-icon
-                                :icon="['fas', 'minus']"
-                                class="p-1 rounded-full aspect-square bg-slate-200"
-                            />
-
-                            <strong class="text-xl">2</strong>
-                            <font-awesome-icon
-                                :icon="['fas', 'plus']"
-                                class="p-1 rounded-full aspect-square bg-slate-200"
-                            />
-                        </div>
-                    </div>
                     <strong class="flex flex-row space-x-5 text-xl">
                         <span>Total:</span>
-                        <span>$7</span>
+                        <span>${{ totalAmount.toFixed(2) }}</span>
                     </strong>
                 </div>
             </div>
+            <!-- Submit Order Button -->
             <div class="flex flex-col space-y-4">
-                <!-- Bottom -->
                 <button
+                    @click="submitOrder"
                     class="py-4 text-xl font-bold tracking-widest text-white rounded-xl bg-primary"
+                    :disabled="orderItems.length === 0"
                 >
                     Submit order
                 </button>
@@ -118,11 +96,64 @@
                             alt=""
                             class="h-10"
                         />
-                        <span>+62 895-1516-4264</span>
+                        <span> 6372 **** **** 1234</span>
                     </div>
                     <small class="absolute text-xs right-3 top-2">Edit</small>
                 </button>
             </div>
         </div>
+        <!-- Success Notification -->
+        <!-- <div
+            v-if="showNotification"
+            class="fixed inset-x-0 top-0 z-50 p-4 text-white bg-green-500 rounded-b-lg"
+        >
+            <font-awesome-icon :icon="['fas', 'check-circle']" class="w-4" />
+            <span class="ml-2">Order submitted successfully!</span>
+        </div> -->
+        <!-- Loading Spinner -->
+        <div
+            v-if="loading"
+            class="fixed top-0 left-0 flex items-center justify-center w-full h-screen space-x-4 bg-black/50"
+        >
+            <font-awesome-icon
+                :icon="['fas', 'spinner']"
+                class="text-4xl text-primary animate-spin"
+            />
+            <p class="text-2xl font-bold text-white">
+                Processing your order...
+            </p>
+        </div>
+
+        <!-- Notification Modal -->
+        <div
+            v-if="showNotification"
+            class="fixed top-0 left-0 flex items-center justify-center w-full h-screen bg-black/50"
+        >
+            <div class="p-10 bg-white rounded-lg shadow-xl">
+                <h1 class="text-2xl font-bold text-primary">
+                    Order Successful!
+                </h1>
+                <p class="text-lg">
+                    Your order has been successfully submitted.
+                </p>
+            </div>
+        </div>
     </div>
 </template>
+
+<script>
+import { mapState, mapGetters, mapActions } from "vuex";
+
+export default {
+    computed: {
+        ...mapState(["showNotification", "loading"]),
+        ...mapGetters(["orderItems", "totalAmount", "deliveryFee"]),
+    },
+    methods: {
+        ...mapActions(["removeFromOrder", "submitOrder"]),
+        async handleSubmitOrder() {
+            await this.submitOrder();
+        },
+    },
+};
+</script>

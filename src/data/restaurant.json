@@ -1,5 +1,6 @@
 [
     {
+        "id": "unique-id-1",
         "name": "Asian Delight",
         "price": "$9",
         "distance": "2 km away",
@@ -10,6 +11,7 @@
         "category": "Asian Food"
     },
     {
+        "id": "unique-id-2",
         "name": "Chocolate Lava Cake",
         "price": "$5",
         "distance": "1 km away",
@@ -20,6 +22,7 @@
         "category": "Dessert"
     },
     {
+        "id": "unique-id-3",
         "name": "Spaghetti Carbonara",
         "price": "$12",
         "distance": "3 km away",
@@ -30,6 +33,7 @@
         "category": "Italian Food"
     },
     {
+        "id": "unique-id-4",
         "name": "Cheesy Burger",
         "price": "$8",
         "distance": "1.5 km away",
@@ -40,6 +44,7 @@
         "category": "Fast Food"
     },
     {
+        "id": "unique-id-5",
         "name": "Grilled BBQ Ribs",
         "price": "$15",
         "distance": "4 km away",

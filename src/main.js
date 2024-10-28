@@ -3,6 +3,7 @@ import "./assets/index.css";
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
+import store from "./store";
 
 // Import core library dan komponen
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -33,6 +34,7 @@ import {
     faXmark,
     faMinus,
     faPlus,
+    faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 
 // Tambahkan ikon ke library
@@ -59,7 +61,8 @@ library.add(
     faLocationDot,
     faXmark,
     faMinus,
-    faPlus
+    faPlus,
+    faSpinner
 );
 
 const app = createApp(App);
@@ -67,5 +70,6 @@ const app = createApp(App);
 app.component("font-awesome-icon", FontAwesomeIcon);
 
 app.use(router);
+app.use(store);
 
 app.mount("#app");
