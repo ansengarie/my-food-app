@@ -62,7 +62,7 @@ export default {
         return {
             restaurants: restaurantsData,
             selectedCategory: "all",
-            searchQuery: "", // Tambahan untuk search
+            searchQuery: "",
             showSortMenu: false,
             currentSort: "reviews",
             sortLabels: {
@@ -75,7 +75,6 @@ export default {
         };
     },
     computed: {
-        // Filter berdasarkan kategori
         filteredRestaurants() {
             if (this.selectedCategory === "all") {
                 return this.restaurants;
@@ -84,7 +83,6 @@ export default {
                 (restaurant) => restaurant.category === this.selectedCategory
             );
         },
-        // Filter berdasarkan search query
         searchedAndFilteredRestaurants() {
             let filteredList = this.filteredRestaurants;
 
@@ -100,7 +98,6 @@ export default {
 
             return filteredList;
         },
-        // Sort hasil pencarian
         sortedRestaurants() {
             const restaurants = [...this.searchedAndFilteredRestaurants];
 
@@ -157,7 +154,6 @@ export default {
                 this.showSortMenu = false;
             }
         },
-        // Method untuk menerima query pencarian dari parent component
         updateSearch(query) {
             this.searchQuery = query;
         },

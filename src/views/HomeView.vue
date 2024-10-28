@@ -2,20 +2,12 @@
     <section
         class="flex flex-col w-full overflow-hidden md:flex-row bg-secondary"
     >
-        <!-- Hamburger button for mobile -->
-        <button
-            @click="toggleLeftSidebar"
-            class="fixed z-50 top-16 left-4 md:hidden"
-        >
-            <font-awesome-icon icon="bars" />
-        </button>
-
         <!-- Left Sidebar -->
         <MenuSidebar
             :class="{
                 'translate-x-0': isLeftSidebarOpen,
                 '-translate-x-full': !isLeftSidebarOpen,
-                'md:translate-x-0': true, // Selalu tampilkan di desktop
+                'md:translate-x-0': true,
             }"
             class="fixed left-0 top-0 h-full w-64 md:w-[6%] transition-transform duration-300 ease-in-out z-40"
         />
@@ -26,8 +18,17 @@
             <div
                 class="flex flex-col px-4 md:px-10 py-6 md:py-10 space-y-6 md:space-y-10 min-h-[1500px]"
             >
-                <!-- Search and Filter -->
-                <SearchAndFilter @search="handleSearch" />
+                <div class="flex flex-row md:space-x-0 space-x-7">
+                    <!-- Hamburger button for mobile -->
+                    <button
+                        @click="toggleLeftSidebar"
+                        class="z-50 top-8 left-4 md:hidden"
+                    >
+                        <font-awesome-icon icon="bars" />
+                    </button>
+                    <!-- Search and Filter -->
+                    <SearchAndFilter @search="handleSearch" />
+                </div>
 
                 <!-- Promotional Banner -->
                 <PromotionalBanner />
@@ -58,7 +59,7 @@
             :class="{
                 'translate-y-0': isRightSidebarOpen,
                 'translate-y-full': !isRightSidebarOpen,
-                'md:translate-y-0': true, // Selalu tampilkan di desktop
+                'md:translate-y-0': true,
             }"
             class="fixed bottom-0 left-0 w-full md:w-[25%] md:right-0 md:left-auto md:top-0 transition-transform duration-300 ease-in-out z-30"
         />
@@ -114,7 +115,6 @@ export default {
     },
     methods: {
         handleSearch(query) {
-            // Teruskan query pencarian ke komponen SortAndRestaurantList
             this.$refs.restaurantList.updateSearch(query);
         },
     },

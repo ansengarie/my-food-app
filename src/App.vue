@@ -2,32 +2,22 @@
     <router-view />
 </template>
 
-<script>
-import { ref, provide } from "vue";
+<script setup>
+import { ref, provide, onMounted } from "vue";
 
-export default {
-    name: "App",
-    setup() {
-        // Gunakan matchMedia untuk mendeteksi viewport
-        const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+const isDesktop = ref(window.matchMedia("(min-width: 768px)").matches);
+const isLeftSidebarOpen = ref(isDesktop.value);
+const isRightSidebarOpen = ref(isDesktop.value);
 
-        // Set nilai default berdasarkan viewport
-        const isLeftSidebarOpen = ref(isDesktop);
-        const isRightSidebarOpen = ref(isDesktop);
+provide("isLeftSidebarOpen", isLeftSidebarOpen);
+provide("isRightSidebarOpen", isRightSidebarOpen);
 
-        // Provide nilai ke komponen child
-        provide("isLeftSidebarOpen", isLeftSidebarOpen);
-        provide("isRightSidebarOpen", isRightSidebarOpen);
-
-        // Optional: Listen untuk perubahan viewport
-        window
-            .matchMedia("(min-width: 768px)")
-            .addEventListener("change", (e) => {
-                isLeftSidebarOpen.value = e.matches;
-                isRightSidebarOpen.value = e.matches;
-            });
-    },
-};
+onMounted(() => {
+    window.matchMedia("(min-width: 768px)").addEventListener("change", (e) => {
+        isLeftSidebarOpen.value = e.matches;
+        isRightSidebarOpen.value = e.matches;
+    });
+});
 </script>
 
 <style>

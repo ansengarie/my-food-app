@@ -1,6 +1,6 @@
 <template>
     <div
-        class="flex flex-col w-full space-y-4 md:flex-row md:space-y-0 md:space-x-5"
+        class="flex flex-col w-3/4 space-y-4 md:w-full md:flex-row md:space-y-0 md:space-x-5"
     >
         <div class="relative w-full bg-white rounded-full md:w-1/2">
             <font-awesome-icon
@@ -17,25 +17,17 @@
                 @input="handleSearch"
             />
         </div>
-        <!-- <button type="submit" class="flex flex-row items-center px-5 py-2 space-x-4 bg-white rounded-full text-slate-400">
-            <font-awesome-icon :icon="['fas', 'sliders']" class="text-slate-400" />
-            <span>Filter</span>
-        </button> -->
     </div>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            searchQuery: "",
-        };
-    },
-    methods: {
-        handleSearch() {
-            // Emit event dengan nilai pencarian
-            this.$emit("search", this.searchQuery);
-        },
-    },
+<script setup>
+import { ref } from "vue";
+
+const searchQuery = ref("");
+
+const emit = defineEmits(["search"]);
+
+const handleSearch = () => {
+    emit("search", searchQuery.value);
 };
 </script>

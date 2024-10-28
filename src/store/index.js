@@ -14,7 +14,6 @@ export default createStore({
             );
 
             if (existingItemIndex !== -1) {
-                // Update existing item
                 const existingItem = state.orderItems[existingItemIndex];
                 const updatedItem = {
                     ...existingItem,
@@ -50,7 +49,6 @@ export default createStore({
     },
     actions: {
         addToOrder({ commit }, item) {
-            // Memastikan totalPrice dihitung dengan benar
             const orderItem = {
                 ...item,
                 totalPrice:

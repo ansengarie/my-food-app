@@ -39,35 +39,31 @@
     </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from "vue";
+import { useStore } from "vuex";
 import FoodDetailModal from "./FoodDetailModal.vue";
 
-export default {
-    components: {
-        FoodDetailModal,
+const props = defineProps({
+    restaurant: {
+        type: Object,
+        required: true,
     },
-    data() {
-        return {
-            isModalOpen: false,
-        };
-    },
-    props: {
-        restaurant: {
-            type: Object,
-            required: true,
-        },
-    },
-    methods: {
-        showFoodDetail() {
-            this.isModalOpen = true;
-        },
-        closeModal() {
-            this.isModalOpen = false;
-        },
-        handleAddToOrder(orderItem) {
-            this.$store.dispatch("addToOrder", orderItem); // Dispatch add to order action
-            this.closeModal(); // Close modal after adding
-        },
-    },
+});
+
+const store = useStore();
+const isModalOpen = ref(false);
+
+const showFoodDetail = () => {
+    isModalOpen.value = true;
+};
+
+const closeModal = () => {
+    isModalOpen.value = false;
+};
+
+const handleAddToOrder = (orderItem) => {
+    store.dispatch("addToOrder", orderItem);
+    closeModal();
 };
 </script>

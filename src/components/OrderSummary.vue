@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white h-[70vh] md:h-screen overflow-hidden">
+    <div class="bg-white h-[70vh] md:h-screen overflow-hidden pb-8">
         <!-- Close button for mobile -->
         <button
             @click="closeRightSidebar"
@@ -109,15 +109,6 @@
                 </button>
             </div>
         </div>
-        <!-- Success Notification -->
-        <!-- <div
-            v-if="showNotification"
-            class="fixed inset-x-0 top-0 z-50 p-4 text-white bg-green-500 rounded-b-lg"
-        >
-            <font-awesome-icon :icon="['fas', 'check-circle']" class="w-4" />
-            <span class="ml-2">Order submitted successfully!</span>
-        </div> -->
-        
     </div>
 </template>
 

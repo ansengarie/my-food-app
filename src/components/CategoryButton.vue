@@ -28,7 +28,6 @@ export default {
             required: true,
         },
         isActive: {
-            // New prop to check if button is active
             type: Boolean,
             default: false,
         },

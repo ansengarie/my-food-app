@@ -56,13 +56,13 @@ export default {
     },
     data() {
         return {
-            selectedCategory: "all", // Store currently selected category
+            selectedCategory: "all", 
         };
     },
     methods: {
         selectCategory(category) {
-            this.selectedCategory = category; // Update selected category
-            this.$emit("category-selected", category); // Emit event with selected category
+            this.selectedCategory = category; 
+            this.$emit("category-selected", category); 
         },
     },
 };

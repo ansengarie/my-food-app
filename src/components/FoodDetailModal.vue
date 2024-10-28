@@ -88,8 +88,8 @@ export default {
     },
     methods: {
         closeModal() {
-            this.quantity = 1; // Reset quantity when closing
-            this.$emit("close"); // Emit close event
+            this.quantity = 1; 
+            this.$emit("close"); 
         },
         increaseQuantity() {
             this.quantity++;
@@ -101,7 +101,7 @@ export default {
         },
         addToOrder() {
             const orderItem = {
-                id: this.food.id, // Pastikan ada id di food
+                id: this.food.id, 
                 name: this.food.name,
                 image: this.food.image,
                 price: this.food.price,
@@ -110,8 +110,8 @@ export default {
                     parseFloat(this.food.price.replace("$", "")) *
                     this.quantity,
             };
-            this.$emit("add-to-order", orderItem); // Emit add-to-order event
-            this.closeModal(); // Close modal after adding
+            this.$emit("add-to-order", orderItem); 
+            this.closeModal(); 
         },
     },
 };
