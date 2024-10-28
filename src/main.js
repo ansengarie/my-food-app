@@ -35,6 +35,7 @@ import {
     faMinus,
     faPlus,
     faSpinner,
+    faChevronUp,
 } from "@fortawesome/free-solid-svg-icons";
 
 // Tambahkan ikon ke library
@@ -62,7 +63,8 @@ library.add(
     faXmark,
     faMinus,
     faPlus,
-    faSpinner
+    faSpinner,
+    faChevronUp
 );
 
 const app = createApp(App);

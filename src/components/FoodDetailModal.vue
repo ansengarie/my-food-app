@@ -10,7 +10,7 @@
         ></div>
 
         <!-- Modal Content -->
-        <div class="relative z-50 w-1/3 p-8 bg-white rounded-xl">
+        <div class="relative z-50 w-3/4 p-8 bg-white md:w-1/3 rounded-xl">
             <button
                 @click.stop="closeModal"
                 class="absolute top-0 p-2 text-gray-500 right-1 hover:text-gray-700"

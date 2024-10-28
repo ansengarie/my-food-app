@@ -2,6 +2,7 @@
     <CategoryButtons
         @category-selected="selectCategory"
         :selectedCategory="selectedCategory"
+        class="overflow-x-auto md:overflow-x-visible"
     />
     <div class="flex flex-col space-y-2">
         <!-- Sort Dropdown -->
@@ -10,7 +11,8 @@
                 @click.stop="toggleSortMenu"
                 class="flex flex-row items-center p-2 space-x-2 rounded-lg"
             >
-                <span>Sort by:
+                <span
+                    >Sort by:
                     <strong>{{ sortLabels[currentSort] }}</strong>
                 </span>
                 <font-awesome-icon :icon="['fas', 'chevron-down']" />
@@ -34,7 +36,9 @@
         </div>
 
         <!-- Restaurant Grid -->
-        <div class="grid grid-flow-row grid-cols-3 gap-10">
+        <div
+            class="grid grid-flow-row grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 md:gap-10"
+        >
             <RestaurantCard
                 v-for="restaurant in sortedRestaurants"
                 :key="restaurant.name"

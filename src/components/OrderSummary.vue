@@ -1,7 +1,14 @@
 <template>
-    <div class="fixed right-0 w-3/12 h-screen overflow-hidden bg-white">
+    <div class="bg-white h-[70vh] md:h-screen overflow-hidden">
+        <!-- Close button for mobile -->
+        <button
+            @click="closeRightSidebar"
+            class="self-start mt-4 ml-4 md:hidden"
+        >
+            <font-awesome-icon icon="chevron-down" />
+        </button>
         <div
-            class="flex flex-col justify-between h-full px-10 py-10 space-y-20 overflow-y-auto"
+            class="flex flex-col justify-between h-full px-4 py-6 space-y-6 overflow-y-auto md:px-10 md:py-10 md:space-y-20"
         >
             <!-- Order -->
             <div class="space-y-5 divide-y divide-solid">
@@ -110,41 +117,24 @@
             <font-awesome-icon :icon="['fas', 'check-circle']" class="w-4" />
             <span class="ml-2">Order submitted successfully!</span>
         </div> -->
-        <!-- Loading Spinner -->
-        <div
-            v-if="loading"
-            class="fixed top-0 left-0 flex items-center justify-center w-full h-screen space-x-4 bg-black/50"
-        >
-            <font-awesome-icon
-                :icon="['fas', 'spinner']"
-                class="text-4xl text-primary animate-spin"
-            />
-            <p class="text-2xl font-bold text-white">
-                Processing your order...
-            </p>
-        </div>
-
-        <!-- Notification Modal -->
-        <div
-            v-if="showNotification"
-            class="fixed top-0 left-0 flex items-center justify-center w-full h-screen bg-black/50"
-        >
-            <div class="p-10 bg-white rounded-lg shadow-xl">
-                <h1 class="text-2xl font-bold text-primary">
-                    Order Successful!
-                </h1>
-                <p class="text-lg">
-                    Your order has been successfully submitted.
-                </p>
-            </div>
-        </div>
+        
     </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapActions } from "vuex";
+import { inject } from "vue";
 
 export default {
+    setup() {
+        const isRightSidebarOpen = inject("isRightSidebarOpen");
+
+        const closeRightSidebar = () => {
+            isRightSidebarOpen.value = false;
+        };
+
+        return { closeRightSidebar };
+    },
     computed: {
         ...mapState(["showNotification", "loading"]),
         ...mapGetters(["orderItems", "totalAmount", "deliveryFee"]),
